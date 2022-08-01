@@ -26,7 +26,7 @@ import org.apache.linkis.bml.entity.Resource;
 import org.apache.linkis.bml.entity.ResourceVersion;
 import org.apache.linkis.bml.service.ResourceService;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -82,11 +82,8 @@ public class ResourceServiceImpl implements ResourceService {
         for (MultipartFile p : files) {
             String resourceId = (String) properties.get("resourceId");
             InputStream inputStream = p.getInputStream();
-            String fileName =
-                    new String(
-                            p.getOriginalFilename().getBytes(Constant.ISO_ENCODE),
-                            Constant.UTF8_ENCODE);
-            fileName = resourceId;
+            String fileName = resourceId;
+            // fileName = resourceId;
             String path = resourceHelper.generatePath(user, fileName, properties);
             StringBuilder sb = new StringBuilder();
             long size = resourceHelper.upload(path, user, inputStream, sb, true);
